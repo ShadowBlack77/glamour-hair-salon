@@ -1,18 +1,21 @@
 <div>
   <div class="px-32 bg-[url('https://images.pexels.com/photos/1323207/pexels-photo-1323207.jpeg?auto=compress&cs=tinysrgb&w=1800')] bg-cover bg-center text-white"> 
-    <div class="flex flex-col w-1/2 h-[70vh] justify-center">
+    <div 
+      class="flex flex-col w-1/2 h-[70vh] justify-center"
+      [@fade-in-hero]="heroState()"
+    >
       <div class="mb-5">
         <h2 class="text-6xl">Get Hair Style<br /> You Deserve</h2>
-      </div>
-      <div>
-        <button class="bg-black bg-white text-black rounded-md px-4 py-0.5">Book appointment</button>
       </div>
       <div class="w-1/2 my-5">
         <p class="text-xl">Discover a world of sophisticaion and presonalized beauty at Glamour. Our salon is more than just a place for haircuts; it's a haven where your unique style takes center stage.</p>
       </div>
     </div>
   </div>
-  <div class="px-32 py-16 flex justify-between">
+  <div 
+    class="px-32 py-16 flex justify-between"
+    [@fade-in-services]="servicesState()"
+  >
     <div class="w-1/4">
       <h3 class="text-3xl mb-3 font-semibold">Our Services</h3>
       <p>Beyond haircuts, discover a comprehensive range of services, from coloring to extensions</p>
@@ -35,7 +38,11 @@
       </div>
     </div>
   </div>
-  <div class="px-32 py-16 grid grid-cols-2 gap-4">
+  <div 
+    class="px-32 py-16 grid grid-cols-2 gap-4" 
+    (appInViewport)="bookingInView()"
+    [@fade-in-booking]="bookingState()"
+  >
     <div>
       <h3 class="text-3xl mb-3 font-semibold">Booking</h3>
       <p class="my-8">Ready for a transfrmative experience? Book your appointment now at Glamour and let us crafty a style that defines you.</p>
@@ -44,8 +51,12 @@
       <button class="bg-black text-white rounded-md px-4 py-2 w-[250px] text-center">Book appointment</button>
     </div>
   </div>
-  <div class="px-32 py-16">
-    <div class="grid grid-cols-2">
+  <div 
+    class="px-32 py-16" 
+    (appInViewport)="productsInView()"
+    [@fade-in-products]="productsState()"
+  >
+    <div class="grid grid-cols-2 mb-4">
       <div>
         <h3 class="text-3xl mb-3 font-semibold">Our products</h3>
         <p>Experience the difference with top-tier products that enhance both the aesthetics and health of your hair.</p>
@@ -55,44 +66,85 @@
       </div>
     </div>
     <div>
-      <h5>PRODUCTS</h5>
+      <app-products-featured-list />
     </div>
   </div>
-  <div class="px-32 py-16 bg-black text-white flex justify-between">
-    <div class="w-1/2">
+  <div 
+    class="px-32 py-16 bg-black text-white flex justify-between"
+    (appInViewport)="informationInView()"
+    [@fade-in-information]="informationState()"
+  >
+    <div class="w-1/2 flex flex-col justify-between">
       <div class="mb-4 p-4">
         <h3 class="text-3xl mb-3 font-semibold">Why Choose Us</h3>
         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque, voluptas.</p>
       </div>
       <div class="flex">
-        <div class="px-8 border-r border-white">
-          <h3 class="text-8xl">30k</h3>
+        <div class="border-r border-white">
+          <h3 class="text-8xl w-[200px] block">{{ clientsCount() }}k</h3>
           <p>Satisfied clients</p>
         </div>
         <div class="px-8">
-          <h3 class="text-8xl">15</h3>
+          <h3 class="text-8xl w-[200px] block">{{ salonsCount() }}</h3>
           <p>Salons around the city</p>
         </div>
       </div>
     </div>
     <div class="w-1/2">
       <div class="grid grid-cols-2 gap-4 h-full">
-        <div class="bg-white/30 rounded p-4 h-full">
-          <h5>ONE</h5>
+        <div class="bg-white/30 rounded p-8 h-full flex">
+          <div class="me-5">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+            </svg>             
+          </div>
+          <div>
+            <p>Our team of higkly skilled and experienced stylists is dedicated to staying on the cuttuing edge of industry trends. Trust us to trnasform your vision into a stunning reality</p>
+          </div>
         </div>
-        <div class="bg-white/30 rounded p-4 h-full">
-          <h5>TWO</h5>
+        <div class="bg-white/30 rounded p-8 h-full flex">
+          <div class="me-5">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+            </svg>             
+          </div>
+          <div>
+            <p>Our team of higkly skilled and experienced stylists is dedicated to staying on the cuttuing edge of industry trends. Trust us to trnasform your vision into a stunning reality</p>
+          </div>
         </div>
-        <div class="bg-white/30 rounded p-4 h-full">
-          <h5>THREE</h5>
+        <div class="bg-white/30 rounded p-8 h-full flex">
+          <div class="me-5">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+            </svg>             
+          </div>
+          <div>
+            <p>Our team of higkly skilled and experienced stylists is dedicated to staying on the cuttuing edge of industry trends. Trust us to trnasform your vision into a stunning reality</p>
+          </div>
         </div>
-        <div class="bg-white/30 rounded p-4 h-full">
-          <h5>FOUR</h5>
+        <div class="bg-white/30 rounded p-8 h-full flex">
+          <div class="me-5">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+            </svg>             
+          </div>
+          <div>
+            <p>Our team of higkly skilled and experienced stylists is dedicated to staying on the cuttuing edge of industry trends. Trust us to trnasform your vision into a stunning reality</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="px-32 py-16 flex justify-between">
-    <h1>GALLERY</h1>
+  <div class="px-32 py-16">
+    <div class="mb-5 text-center">
+      <h2 class="text-6xl">Gallery</h2>
+    </div>
+    <div>
+      <swiper-container class="my-swiper h-[80vh]" slides-per-view="1" loop="true" autoplay="true">
+        <swiper-slide class="h-full w-full bg-[url('https://images.pexels.com/photos/2867899/pexels-photo-2867899.jpeg?auto=compress&cs=tinysrgb&w=1600')] bg-cover bg-center"></swiper-slide>
+        <swiper-slide class="h-full w-full bg-[url('https://images.pexels.com/photos/1327328/pexels-photo-1327328.jpeg?auto=compress&cs=tinysrgb&w=1600')] bg-cover bg-center"></swiper-slide>
+        <swiper-slide class="h-full w-full bg-[url('https://images.pexels.com/photos/247322/pexels-photo-247322.jpeg?auto=compress&cs=tinysrgb&w=1600')] bg-cover bg-top"></swiper-slide>
+      </swiper-container>
+    </div>
   </div>
 </div>

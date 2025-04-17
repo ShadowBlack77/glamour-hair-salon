@@ -5,7 +5,9 @@ import { RouterModule } from "@angular/router";
   selector: 'app-header',
   templateUrl: './header.component.html',
   imports: [
-    RouterModule
+    RouterModule,
   ]
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+
+}

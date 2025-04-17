@@ -1,4 +1,4 @@
-<header class="flex justify-between px-32 sticky bg-black w-full text-white top-0 left-0 py-2 items-center">
+<header class="flex justify-between px-32 sticky bg-black w-full text-white top-0 left-0 py-2 items-center z-20">
   <nav>
     <ul class="flex">
       <li class="me-2">
@@ -10,9 +10,6 @@
       <li class="me-2">
         <a routerLink="/about">Store</a>
       </li>
-      <li class="me-2">
-        <a routerLink="/about">Book</a>
-      </li>
     </ul>
   </nav>
   <div>
@@ -22,3 +19,8 @@
     <ng-content />
   </div>
 </header>
+
+<!-- -translate-x-[300px]
+<div class="top-0 left-0 z-30 h-screen bg-black/30 w-[300px] text-white absolute" style="backdrop-filter: blur(4px);">
+  <h2>Nav Menu</h2>
+</div> -->

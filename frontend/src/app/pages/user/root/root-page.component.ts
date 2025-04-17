@@ -10,7 +10,7 @@ import { FooterComponent, HeaderComponent } from "@glamour/shared";
     RouterModule,
     HeaderComponent,
     FooterComponent,
-    AuthHeaderSegmentComponent
+    AuthHeaderSegmentComponent,
   ]
 })
 export class RootPageComponent {}

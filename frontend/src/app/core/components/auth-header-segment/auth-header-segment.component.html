@@ -1,1 +1,17 @@
-<button>Sign Out</button>
+@if (user()) {
+  <ul class="flex items-center">
+    <li class="me-2">
+      <a routerLink="/auth/sing-in">Profile</a>
+    </li>
+    <li class="me-2">
+      <a routerLink="/auth/sing-in">Cart</a>
+    </li>
+    <li class="me-2">
+      <a routerLink="/auth/sing-in">
+        Logout
+      </a>
+    </li>
+  </ul>
+} @else {
+  <a routerLink="/auth/sing-in">Sign In</a>
+}
