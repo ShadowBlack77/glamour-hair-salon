@@ -1,4 +1,4 @@
-import { Controller, Get, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Get, HttpCode, HttpStatus, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from '../repository/auth.service';
 
 @Controller({
@@ -11,6 +11,6 @@ export class AuthController {
   @Get('profile')
   @HttpCode(HttpStatus.OK)
   getProfile() {
-    return { user: { id: '1', email: 'a@a.com', role: 'user' } };
+    throw new UnauthorizedException();
   }
 }

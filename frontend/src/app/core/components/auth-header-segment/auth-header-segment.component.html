@@ -1,17 +1,17 @@
 @if (user()) {
   <ul class="flex items-center">
     <li class="me-2">
-      <a routerLink="/auth/sing-in">Profile</a>
+      <a routerLink="/auth/sign-in">Profile</a>
     </li>
     <li class="me-2">
-      <a routerLink="/auth/sing-in">Cart</a>
+      <a routerLink="/auth/sign-in">Cart</a>
     </li>
     <li class="me-2">
-      <a routerLink="/auth/sing-in">
+      <a routerLink="/auth/sign-in">
         Logout
       </a>
     </li>
   </ul>
 } @else {
-  <a routerLink="/auth/sing-in">Sign In</a>
+  <a routerLink="/auth/sign-in">Sign In</a>
 }
