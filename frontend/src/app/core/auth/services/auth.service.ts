@@ -1,5 +1,5 @@
 import { Inject, inject, Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, take } from "rxjs";
+import { BehaviorSubject, map, Observable, switchMap, take, tap } from "rxjs";
 import { User } from "../models/user.model";
 import { HttpClient } from "@angular/common/http";
 import { ENV_CONFIG, EnvConfig } from "../../env/env.tokens";
@@ -18,10 +18,13 @@ export class AuthService {
   init(): Observable<void> {
     return new Observable<void>((observer) => {
       this._httpClient.get(`${this._envConfig.backendUrl}/auth/profile`, { withCredentials: true }).pipe(
-        take(1)
+        take(1),
+        map((data: any) => {
+          return data.content;
+        })
       ).subscribe({
-        next: (data: any) => {
-          this.user$.next(data.user);
+        next: (user) => {
+          this.user$.next(user);
 
           observer.next();
           observer.complete();
@@ -34,5 +37,42 @@ export class AuthService {
         }
       })
     });
+  }
+
+  signIn(SignInDto: any): Observable<any> {
+    return this._httpClient.post(`${this._envConfig.backendUrl}/auth/sign-in`, SignInDto, { withCredentials: true }).pipe(
+      take(1),
+      switchMap(() => {
+        return this.profile().pipe(
+          take(1),
+          tap((user) => {
+            this.user$.next(user);
+          })
+        );
+      })
+    );
+  }
+
+  signUp(signUpDto: any): Observable<any> { 
+    return this._httpClient.post(`${this._envConfig.backendUrl}/auth/sign-up`, signUpDto);
+  }
+
+  signOut(): void {
+    this._httpClient.post(`${this._envConfig.backendUrl}/auth/sign-out`, {}, { withCredentials: true }).pipe(
+      take(1)
+    ).subscribe({
+      next: () => {
+        this.user$.next(undefined);
+      }
+    });
+  }
+
+  private profile(): Observable<any> {
+    return this._httpClient.get(`${this._envConfig.backendUrl}/auth/profile`, { withCredentials: true }).pipe(
+      take(1),
+      map((data: any) => {
+        return data.content;
+      })
+    );
   }
 }

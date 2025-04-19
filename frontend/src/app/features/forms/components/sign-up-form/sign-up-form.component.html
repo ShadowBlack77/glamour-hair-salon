@@ -1,8 +1,22 @@
 <form 
-  [formGroup]="signInForm" 
-  (submit)="onSubmit()" 
+  [formGroup]="signUpForm" 
+  (submit)="onSubmit()"
   class="w-full"
 >
+<div class="mb-3">
+  <label
+    for="username"
+    class="block text-lg mb-2"
+  >Username</label>
+  <input 
+    type="username"
+    id="username"
+    name="username"
+    formControlName="username"
+    placeholder="John Doe"
+    class="border border-black rounded-md w-full px-2 py-1"
+  >
+</div>
   <div class="mb-3">
     <label
       for="email"
@@ -32,13 +46,12 @@
     />
   </div>
   <div class="mb-5 flex flex-col items-end">
-    <a routerLink="/">Reset Password?</a>
-    <a routerLink="/auth/sign-up">Create new account!</a>
+    <a routerLink="/auth/sign-in">Login into your account!</a>
   </div>
   <div class="text-center">
     <button
       type="submit"
       class="bg-black text-white rounded-md px-4 py-1 text-xl w-1/2"
-    >Sign In</button>
+    >Sign Up</button>
   </div>
 </form>

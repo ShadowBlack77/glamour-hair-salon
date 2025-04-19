@@ -15,3 +15,6 @@ export * from './loadable/ngrx-state.model';
 export * from './auth/guards/auth.guard';
 export * from './auth/guards/admin-role.guard';
 export * from './auth/guards/user-role.guard';
+
+// INTERCEPTORS
+export * from './auth/interceptors/auth.interceptor';

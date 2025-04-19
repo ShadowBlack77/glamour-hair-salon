@@ -1,12 +1,15 @@
 import { Routes } from '@angular/router';
-import { AboutPageComponent, HomePageComponent, ProductsPageComponent, RootPageComponent, SignInPageComponent, SignUpPageComponent } from './pages';
+import { AboutPageComponent, AdminPageComponent, DashboardPageComponent, HomePageComponent, NotFoundPageComponent, ProductsPageComponent, RootPageComponent, SignInPageComponent, SignUpPageComponent } from './pages';
 import { LoadProductsResolver } from './features';
-import { AuthGuard } from './core';
+import { AdminRoleGuard, AuthGuard, UserRoleGuard } from './core';
 
 export const routes: Routes = [
   {
     path: '',
     component: RootPageComponent,
+    canActivate: [
+      UserRoleGuard
+    ],
     resolve: [
       LoadProductsResolver
     ],
@@ -38,5 +41,20 @@ export const routes: Routes = [
         component: SignUpPageComponent
       }
     ]
+  },
+  {
+    path: 'admin',
+    component: AdminPageComponent,
+    canActivate: [AdminRoleGuard],
+    children: [
+      {
+        path: 'dashboard',
+        component: DashboardPageComponent
+      }
+    ]
+  },
+  {
+    path: '**',
+    component: NotFoundPageComponent
   }
 ];

@@ -4,9 +4,9 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
-import { AuthService, ENV_CONFIG } from '@glamour/core';
+import { AuthInterceptor, AuthService, ENV_CONFIG } from '@glamour/core';
 import { environemnt } from '../env/environments';
-import { provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { productsReducer } from './features/products/store/products.reducer';
 import { ProductsEffects } from './features/products/store/products.effects';
@@ -21,7 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideEffects([
       ProductsEffects
     ]),
-    provideHttpClient(),
+    provideHttpClient(withInterceptorsFromDi()),
     provideAnimations(),
     {
       provide: APP_INITIALIZER,
@@ -37,6 +37,11 @@ export const appConfig: ApplicationConfig = {
         backendUrl: environemnt.backendUrl,
         apiKey: environemnt.apiKey
       }
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
     }
   ]
 };

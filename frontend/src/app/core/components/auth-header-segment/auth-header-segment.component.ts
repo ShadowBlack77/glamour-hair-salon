@@ -31,6 +31,10 @@ export class AuthHeaderSegmentComponent implements OnInit, OnDestroy {
     });
   }
 
+  signOut(): void {
+    this._authService.signOut();
+  }
+
   ngOnDestroy(): void {
     this._destroy$.next();
     this._destroy$.complete();

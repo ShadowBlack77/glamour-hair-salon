@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from "@angular/common";
 import { Component } from "@angular/core";
 import { SignInFormComponent } from "@glamour/features";
 
@@ -5,7 +6,8 @@ import { SignInFormComponent } from "@glamour/features";
   selector: 'app-sign-in-page',
   templateUrl: './sign-in-page.component.html',
   imports: [
-    SignInFormComponent
+    SignInFormComponent,
+    NgOptimizedImage,
   ]
 })
 export class SignInPageComponent {}

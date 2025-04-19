@@ -1,32 +1,41 @@
 import { Component, inject } from "@angular/core";
-import { ReactiveFormsModule, FormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Router, RouterLink } from "@angular/router";
 import { AuthService } from "@glamour/core";
 import { take } from "rxjs";
 
 @Component({
-  selector: 'app-sign-in-form',
-  templateUrl: './sign-in-form.component.html',
+  selector: 'app-sign-up-form',
+  templateUrl: './sign-up-form.component.html',
   imports: [
-    ReactiveFormsModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterLink
   ]
 })
-export class SignInFormComponent {
+export class SignUpFormComponent {
 
   private readonly _authService: AuthService = inject(AuthService);
   private readonly _router: Router = inject(Router);
 
-  signInForm: FormGroup = new FormGroup({
+  signUpForm: FormGroup = new FormGroup({
+    username: new FormControl({
+      value: '',
+      disabled: false
+    }, {
+      nonNullable: true,
+      validators: [
+        Validators.required
+      ]
+    }),
     email: new FormControl({
       value: '',
       disabled: false
     }, {
       nonNullable: true,
       validators: [
-        Validators.required,
-        Validators.email
+        Validators.email,
+        Validators.required
       ]
     }),
     password: new FormControl({
@@ -38,28 +47,17 @@ export class SignInFormComponent {
         Validators.required
       ]
     })
-  });
+  })
 
   onSubmit(): void {
-    if (this.signInForm.valid) {
-      this._authService.signIn(this.signInForm.getRawValue()).pipe(
+    if (this.signUpForm.valid) {
+      this._authService.signUp(this.signUpForm.getRawValue()).pipe(
         take(1)
       ).subscribe({
-        next: (user) => {
-          if (user.role === 'user') {
-            this._router.navigate(['/']);
-
-            return;
-          }
-
-          this._router.navigate(['/admin/dashboard']);
-          
-          return;
-        },
-        error: (err) => {
-          console.log(err);
+        next: () => {
+          this._router.navigate(['/auth/sign-in']);
         }
-      });
+      })
     }
   }
 }
