@@ -2,13 +2,14 @@ import { Component, inject, OnDestroy, OnInit, signal, WritableSignal } from "@a
 import { AuthService } from "../../auth/services/auth.service";
 import { Subject, takeUntil } from "rxjs";
 import { User } from "../../auth/models/user.model";
-import { RouterLink } from "@angular/router";
+import { RouterModule } from "@angular/router";
 
 @Component({
   selector: 'app-auth-header-segment',
   templateUrl: './auth-header-segment.component.html',
+  styleUrl: './auth-header-segment.component.css',
   imports: [
-    RouterLink,
+    RouterModule,
   ]
 })
 export class AuthHeaderSegmentComponent implements OnInit, OnDestroy {

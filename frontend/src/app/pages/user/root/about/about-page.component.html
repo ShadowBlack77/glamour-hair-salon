@@ -1,5 +1,8 @@
 <div>
-  <div class="px-32 bg-[url('https://images.pexels.com/photos/3331486/pexels-photo-3331486.jpeg?auto=compress&cs=tinysrgb&w=1800')] bg-cover bg-center text-black"> 
+  <div 
+    [@fade-in-hero]="heroState()"
+    class="px-32 bg-[url('https://images.pexels.com/photos/3331486/pexels-photo-3331486.jpeg?auto=compress&cs=tinysrgb&w=1800')] bg-cover bg-center text-black"
+  > 
     <div 
       class="flex flex-col w-1/2 h-[70vh] justify-center"
     >
@@ -12,7 +15,10 @@
     </div>
   </div>
   <div class="px-32 py-16">
-    <div class="grid grid-cols-4 gap-4">
+    <div 
+      [@fade-in-info]="infoState()"
+      class="grid grid-cols-4 gap-4"
+    >
       <div>
         <h2>Title 1</h2>
         <p>
@@ -40,7 +46,11 @@
     </div>
   </div>
   <div class="px-32 py-16">
-    <div class="grid grid-cols-2">
+    <div 
+      [@fade-in-section-one]="sectionOneState()"
+      (appInViewport)="sectionOneInView()"
+      class="grid grid-cols-2"
+    >
       <div>
         <h2 class="text-4xl mb-4">Lorem ipsum dolor sit amet.</h2>
         <p class="text-lg w-2/3">
@@ -58,7 +68,11 @@
       </div>
     </div>
   </div>
-  <div class="px-32 py-16">
+  <div 
+    [@fade-in-section-two]="sectionTwoState()"
+    (appInViewport)="sectionTwoInView()"
+    class="px-32 py-16"
+  >
     <div class="grid grid-cols-2">
       <div class="flex">
         <img 

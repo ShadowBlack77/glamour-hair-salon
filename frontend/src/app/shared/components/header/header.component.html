@@ -1,19 +1,19 @@
-<header class="flex justify-between px-32 sticky bg-black w-full text-white top-0 left-0 py-2 items-center z-20">
+<header class="flex justify-between px-32 sticky bg-black w-full text-gray-400 top-0 left-0 py-2 items-center z-20">
   <nav>
     <ul class="flex">
       <li class="me-2">
-        <a routerLink="/">Home</a>
+        <a routerLink="/home" routerLinkActive="active-link" [ariaCurrentWhenActive]="true">Home</a>
       </li>
       <li class="me-2">
-        <a routerLink="/about">About</a>
+        <a routerLink="/about" routerLinkActive="active-link" [ariaCurrentWhenActive]="true">About</a>
       </li>
       <li class="me-2">
-        <a routerLink="/store">Store</a>
+        <a routerLink="/store" routerLinkActive="active-link" [ariaCurrentWhenActive]="true">Store</a>
       </li>
     </ul>
   </nav>
   <div>
-    <h1 class="text-4xl glamour-title">Glamour</h1>
+    <h1 class="text-4xl glamour-title text-white">Glamour</h1>
   </div>
   <div>
     <ng-content />

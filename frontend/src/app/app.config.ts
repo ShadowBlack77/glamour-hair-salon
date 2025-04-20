@@ -10,16 +10,20 @@ import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@a
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { productsReducer } from './features/products/store/products.reducer';
 import { ProductsEffects } from './features/products/store/products.effects';
+import { CartEffects } from './features/cart/store/cart.effects';
+import { cartReducer } from './features/cart/store/cart.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes), 
     provideStore({
-      products: productsReducer
+      products: productsReducer,
+      cart: cartReducer
     }), 
     provideEffects([
-      ProductsEffects
+      ProductsEffects,
+      CartEffects
     ]),
     provideHttpClient(withInterceptorsFromDi()),
     provideAnimations(),

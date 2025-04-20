@@ -5,6 +5,7 @@ import { BehaviorSubject, Subject, takeUntil } from "rxjs";
 import { selectAllFeaturedProducts } from "../../store/products.selector";
 import { CommonModule, CurrencyPipe, NgOptimizedImage } from "@angular/common";
 import { Product } from "../../model/product.model";
+import { CartButtonComponent } from "../../../cart/components/cart-button/cart-button.component";
 
 @Component({
   selector: 'app-products-featured-list',
@@ -12,18 +13,19 @@ import { Product } from "../../model/product.model";
   imports: [
     CommonModule,
     CurrencyPipe,
-    NgOptimizedImage
+    NgOptimizedImage,
+    CartButtonComponent
   ]
 })
 export class ProductsFeaturedListComponent implements OnInit, OnDestroy {
 
-  private readonly _store: Store<ProductsState> = inject(Store);
+  private readonly _productsStore: Store<ProductsState> = inject(Store);
   private readonly _destroy$: Subject<void> = new Subject<void>();
 
   readonly products$: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
 
   ngOnInit(): void {
-    this._store.select(selectAllFeaturedProducts).pipe(
+    this._productsStore.select(selectAllFeaturedProducts).pipe(
       takeUntil(this._destroy$)
     ).subscribe({
       next: (featuredProducts) => {

@@ -35,4 +35,4 @@ export const productsReducer = createReducer(
     products: setStateAsError(state.products, error),
     featuredProducts: setStateAsError(state.featuredProducts, error)
   }))
-)
+);

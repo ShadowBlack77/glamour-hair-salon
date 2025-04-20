@@ -1,21 +1,27 @@
 import { Routes } from '@angular/router';
-import { AboutPageComponent, AdminPageComponent, DashboardPageComponent, HomePageComponent, NotFoundPageComponent, ProductsPageComponent, RootPageComponent, SignInPageComponent, SignUpPageComponent } from './pages';
-import { LoadProductsResolver } from './features';
-import { AdminRoleGuard, AuthGuard, UserRoleGuard } from './core';
+import { AboutPageComponent, AdminPageComponent, CartPageComponent, DashboardPageComponent, HomePageComponent, NotFoundPageComponent, ProductsPageComponent, ProfilePageComponent, RootPageComponent, SignInPageComponent, SignUpPageComponent } from './pages';
+import { LoadCartResolver, LoadProductsResolver } from './features';
+import { AdminRoleGuard, AuthGuard, ProtectGuard, UserRoleGuard } from './core';
 
 export const routes: Routes = [
   {
     path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  {
+    path: '',
     component: RootPageComponent,
     canActivate: [
-      UserRoleGuard
+      UserRoleGuard,
     ],
     resolve: [
-      LoadProductsResolver
+      LoadProductsResolver,
+      LoadCartResolver
     ],
     children: [
       {
-        path: '',
+        path: 'home',
         component: HomePageComponent
       },
       {
@@ -25,6 +31,16 @@ export const routes: Routes = [
       {
         path: 'store',
         component: ProductsPageComponent
+      },
+      {
+        path: 'profile',
+        canActivate: [ProtectGuard],
+        component: ProfilePageComponent
+      },
+      {
+        path: 'cart',
+        canActivate: [ProtectGuard],
+        component: CartPageComponent
       }
     ]
   },

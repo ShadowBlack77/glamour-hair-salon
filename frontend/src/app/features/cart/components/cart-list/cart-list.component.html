@@ -1,0 +1,47 @@
+@if (cart(); as cart) {
+  <div>
+    @for (cartItem of cart.items; track cartItem.id) {
+      <div class="flex justify-around w-full">
+        <div>
+          <img 
+            [ngSrc]="cartItem.imageUrl"
+            width="175"
+            height="175"
+            [alt]="cartItem.name"
+            priority="lazy"
+          />
+        </div>
+        <div class="flex flex-col justify-center">
+          <p>{{ cartItem.name }}</p>
+          <p>{{ cartItem.description }}</p>
+        </div>
+        <div class="flex flex-col justify-center">
+          <p>{{ cartItem.price | currency }}</p>
+          <div class="flex justify-between">
+            <button>-</button>
+            {{ cartItem.quantity }}
+            <button>+</button>
+          </div>
+        </div>
+      </div>
+    }
+  
+    @if (cart.items.length > 0) {
+      <div class="w-full flex justify-center">
+        <div class="w-1/2">
+          <div class="flex justify-evenly w-full mb-4">
+            <p>Subtotal</p>
+            <p>{{ cart.totalPrice | currency }}</p>
+          </div>
+          <div class="text-center">
+            <button class="bg-black text-white rounded-md py-1 w-1/2 text-lg">Payout</button>
+          </div>
+        </div>
+      </div>
+    } @else {
+      <div class="w-full min-h-[55vh] flex justify-center items-center">
+        <p class="text-xl">Cart is currently empty!</p>
+      </div>
+    }
+  </div>
+}

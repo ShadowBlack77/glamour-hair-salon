@@ -1,13 +1,13 @@
 @if (user()) {
   <ul class="flex items-center">
     <li class="me-2">
-      <a routerLink="/auth/sign-in">Profile</a>
+      <a routerLink="/profile" routerLinkActive="active-link" [ariaCurrentWhenActive]="true">Profile</a>
     </li>
     <li class="me-2">
-      <a routerLink="/auth/sign-in">Cart</a>
+      <a routerLink="/cart" routerLinkActive="active-link" [ariaCurrentWhenActive]="true">Cart</a>
     </li>
     <li class="me-2">
-      <a (click)="signOut()" routerLink="/">
+      <a (click)="signOut()" routerLink="/" class="text-white">
         Logout
       </a>
     </li>

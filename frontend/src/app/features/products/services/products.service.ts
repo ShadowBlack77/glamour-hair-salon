@@ -10,8 +10,7 @@ import { ENV_CONFIG, EnvConfig } from "@glamour/core";
 export class ProductsService {
 
   private readonly _httpClient: HttpClient = inject(HttpClient);
-
-  constructor(@Inject(ENV_CONFIG) private readonly _envConfig: EnvConfig) {}
+  private readonly _envConfig: EnvConfig = inject(ENV_CONFIG);
 
   getAll(): Observable<Product[]> {
     return this._httpClient.get<Product[]>(`${this._envConfig.backendUrl}/ecommerce/all-products`);

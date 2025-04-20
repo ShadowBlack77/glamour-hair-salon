@@ -3,13 +3,15 @@ import { ProductsFeaturedListComponent } from "@glamour/features";
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { InViewportDirective } from "@glamour/shared";
 import { interval, map, takeWhile } from "rxjs";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   imports: [
     ProductsFeaturedListComponent,
-    InViewportDirective
+    InViewportDirective,
+    RouterLink
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   animations: [

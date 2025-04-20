@@ -1,4 +1,4 @@
-import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
+import { Inject, Injectable, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
 import { FirebaseAdmin, InjectFirebaseAdmin } from 'nestjs-firebase';
 import { FIREBASE_HELPER, FirebaseHelper } from '../utils/firebase-helper.utils';
 import { Response } from 'express';
@@ -12,29 +12,37 @@ export class AuthService {
   ) {}
 
   async signIn(res: Response, signInDto: any): Promise<any> {
-    await this._firebaseHelper.signInWithEmailAndPassword(res, signInDto);
+    try {
+      await this._firebaseHelper.signInWithEmailAndPassword(res, signInDto);
 
-    return res.status(200).json({ content: 'logged in' });
+      return res.status(200).json({ content: 'logged in' });
+    } catch (error) {
+      throw new UnauthorizedException('Invalid Credentials');
+    }
   }
 
   async signUp(res: Response, signUpDto: any): Promise<any> {
-    const createdUser = await this._firebase.auth.createUser({
-      email: signUpDto.email,
-      password: signUpDto.password,
-    });
-
-    const userRef = this._firebase.firestore.collection('users').doc(createdUser.uid);
-    const userDoc = await userRef.get();
-
-    if (!userDoc.exists) {
-      await userRef.create({
-        uid: createdUser.uid,
-        username: signUpDto.username,
-        role: 'user'
+    try {
+      const createdUser = await this._firebase.auth.createUser({
+        email: signUpDto.email,
+        password: signUpDto.password,
       });
+  
+      const userRef = this._firebase.firestore.collection('users').doc(createdUser.uid);
+      const userDoc = await userRef.get();
+  
+      if (!userDoc.exists) {
+        await userRef.create({
+          uid: createdUser.uid,
+          username: signUpDto.username,
+          role: 'user'
+        });
+      }
+  
+      return res.status(201).json({ content: 'account created' });
+    } catch(error) {
+      throw new InternalServerErrorException(error);
     }
-
-    return res.status(201).json({ content: 'account created' });
   }
 
   async signOut(res: Response): Promise<any> {

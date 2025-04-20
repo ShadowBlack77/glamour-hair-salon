@@ -1,9 +1,9 @@
 <div>
-  <div class="px-32 bg-[url('https://images.pexels.com/photos/1323207/pexels-photo-1323207.jpeg?auto=compress&cs=tinysrgb&w=1800')] bg-cover bg-center text-white"> 
-    <div 
-      class="flex flex-col w-1/2 h-[70vh] justify-center"
-      [@fade-in-hero]="heroState()"
-    >
+  <div 
+    [@fade-in-hero]="heroState()"
+    class="px-32 bg-[url('https://images.pexels.com/photos/1323207/pexels-photo-1323207.jpeg?auto=compress&cs=tinysrgb&w=1800')] bg-cover bg-center text-white"
+  > 
+    <div class="flex flex-col w-1/2 h-[70vh] justify-center">
       <div class="mb-5">
         <h2 class="text-6xl">Get Hair Style<br /> You Deserve</h2>
       </div>
@@ -48,7 +48,7 @@
       <p class="my-8">Ready for a transfrmative experience? Book your appointment now at Glamour and let us crafty a style that defines you.</p>
     </div>
     <div class="flex justify-end items-start">
-      <button class="bg-black text-white rounded-md px-4 py-2 w-[250px] text-center">Book appointment</button>
+      <a routerLink="/profile" class="bg-black text-white rounded-md px-4 py-2 w-[250px] text-center">Book appointment</a>
     </div>
   </div>
   <div 
@@ -62,7 +62,7 @@
         <p>Experience the difference with top-tier products that enhance both the aesthetics and health of your hair.</p>
       </div>
       <div class="flex justify-end items-start">
-        <button class="bg-black text-white rounded-md px-4 py-2 w-[250px] text-center">Open Store</button>
+        <a routerLink="/store" class="bg-black text-white rounded-md px-4 py-2 w-[250px] text-center">Open Store</a>
       </div>
     </div>
     <div>
