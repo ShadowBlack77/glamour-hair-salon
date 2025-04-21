@@ -4,21 +4,9 @@ import { FirebaseAdmin, InjectFirebaseAdmin } from "nestjs-firebase";
 import * as admin from 'firebase-admin';
 
 @Injectable()
-export class EcommerceService {
-  
+export class CartService {
+
   constructor(@InjectFirebaseAdmin() private readonly _firebase: FirebaseAdmin) {}
-
-  async getAllProducts(): Promise<any> {
-    try { 
-      const productsSnapshot = await this._firebase.firestore.collection('products').get();
-
-      const products = productsSnapshot.docs.flatMap((doc) => doc.data());
-
-      return products;
-    } catch (error) {
-      throw new InternalServerErrorException(error);
-    }
-  }
 
   async getCart(res: Response, userId: string): Promise<any> {
     try {
@@ -43,7 +31,7 @@ export class EcommerceService {
       throw new InternalServerErrorException(error);
     }
   }
-
+  
   async addToCart(res: Response, userId: string, product: any) {
     try {
       const firestore = this._firebase.firestore;
@@ -96,6 +84,49 @@ export class EcommerceService {
       });
 
       return res.status(200).json({ content: 'Product added successfully' });
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
+  }
+
+  async update(res: Response, userId: string, productId: string, quantityDto: any): Promise<any> {
+    try {
+      const { quantity } = quantityDto;
+      const firestore = this._firebase.firestore;
+      const cartDocRef = firestore.collection('cart').doc(userId);
+
+      await firestore.runTransaction(async (tx) => {
+        const cartSnap = await tx.get(cartDocRef);
+        const currentCart = cartSnap.data();
+
+        const exists = currentCart!.items.find((item: any) => item.id === productId);
+
+        let updatedItems = exists ? 
+          currentCart!.items.map((item: any) => {
+            return item.id === productId ?
+              { ...item, quantity } :
+              item
+          }) : [
+            ...currentCart!.items
+          ];
+
+        updatedItems = quantity === 0 ? updatedItems.filter((item: any) => item.id !== productId) : updatedItems;
+
+        const totalQuantity = updatedItems.reduce((sum: any, i: any) => sum + i.quantity, 0);
+        const totalPrice = updatedItems.reduce((sum: any, i: any) => sum + i.price * i.quantity, 0);
+
+        const updatedCart = {
+          ...currentCart,
+          items: updatedItems,
+          totalQuantity,
+          totalPrice,
+          updatedAt: admin.firestore.Timestamp.now()
+        };
+
+        tx.set(cartDocRef, updatedCart, { merge: true });
+      });
+  
+      return res.status(200).json({ content: 'Updated' });
     } catch (error) {
       throw new InternalServerErrorException(error);
     }

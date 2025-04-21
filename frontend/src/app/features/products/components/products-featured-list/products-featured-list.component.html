@@ -1,8 +1,8 @@
 <div [ngClass]="{
-  'grid grid-cols-4 gap-4' : (products$ | async)!.length > 0
+  'grid grid-cols-5 gap-4' : (products$ | async)!.length > 0
 }">
   @for (product of products$ | async; track product.id) {
-    <div class="p-4 border border-black rounded-md relative">
+    <div class="p-4 border border-black rounded-md">
       <div class="flex justify-center my-4">
         <img 
           [ngSrc]="product.imageUrl"
@@ -12,13 +12,19 @@
           priority
         />
       </div>
-      <div>
-        <h3>{{ product.name }}</h3>
-        <p>{{ product.price | currency }}<p>
+      <div class="mb-4">
+        <div class="text-center">
+          <h3 class="text-lg">{{ product.name }}</h3>
+        </div>
+        <div class="text-center">
+          <p>{{ product.price | currency }}<p></p>
+        </div>
       </div>
-      <app-cart-button 
-        [product]="product"
-      />
+      <div class="flex justify-center">
+        <app-cart-button 
+          [product]="product"
+        />
+      </div>
     </div>
   } @empty {
     <div class="grid min-h-[140px] w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">

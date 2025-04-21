@@ -13,6 +13,6 @@ export class ProductsService {
   private readonly _envConfig: EnvConfig = inject(ENV_CONFIG);
 
   getAll(): Observable<Product[]> {
-    return this._httpClient.get<Product[]>(`${this._envConfig.backendUrl}/ecommerce/all-products`);
+    return this._httpClient.get<Product[]>(`${this._envConfig.backendUrl}/products/`);
   }
 }

@@ -1,13 +1,13 @@
 <button 
   (click)="addToCart()"
-  class="absolute top-2.5 right-5 border border-black p-2 rounded-full w-[40px] h-[40px] flex justify-center items-center" 
+  class="rounded-md border border-black px-4 py-1 flex justify-center items-center" 
   [ngClass]="{
     'bg-black': isProductInCart()
   }"
 >
   @if (!isProductInCart()) {
-    <i class="bi bi-cart text-lg"></i>
+    <span class="text-lg">Add to cart</span>
   } @else {
-    <i class="bi bi-cart-fill text-lg text-white"></i>
+    <span class="text-lg text-white">Go to cart</span>
   }
 </button>

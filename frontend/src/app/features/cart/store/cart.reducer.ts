@@ -65,5 +65,33 @@ export const cartReducer = createReducer(
   on(CartActions.addToCartFailure, (state, { error }) => ({
     ...state,
     cart: setStateAsError(state.cart, error)
-  }))
+  })),
+  on(CartActions.updateProductCartQuantity, (state, { id, quantity }) => {
+    const currentCart = state.cart!.data!;
+    const items = currentCart.items;
+
+    const exists = items.find(item => item.id === id);
+
+    let updatedItems = exists ? items.map(item => 
+      item.id === id ?
+      { ...item, quantity: quantity } :
+      item
+    ) : [
+      ...items
+    ]
+
+    updatedItems = quantity === 0 ? updatedItems.filter((item) => item.id !== id) : updatedItems;
+
+    const updatedCart: Cart = {
+      ...currentCart,
+      items: updatedItems,
+      totalQuantity: updatedItems.reduce((sum, i) => sum + i.quantity, 0),
+      totalPrice: updatedItems.reduce((sum, i) => sum + i.price * i.quantity, 0),
+    };
+
+    return {
+      ...state,
+      cart: patchLoadingState(state.cart, updatedCart)
+    }
+  })
 );

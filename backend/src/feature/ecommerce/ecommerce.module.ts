@@ -1,13 +1,11 @@
 import { Module } from '@nestjs/common';
-import { EcommerceController } from './controller/ecommerce.controller';
-import { EcommerceService } from './repository/ecommerce.service';
+import { ProductModule } from './products/product.module';
+import { CartModule } from './cart/cart.module';
 
 @Module({
-  controllers: [
-    EcommerceController
+  imports: [
+    ProductModule,
+    CartModule
   ],
-  providers: [
-    EcommerceService
-  ]
 })
 export class EcommerceModule {}

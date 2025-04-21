@@ -1,0 +1,18 @@
+* Home 
+  - Zmienić opis (4 kwadraty na galerią)
+
+* Store
+  - Dodać jeszcze 2-3 produkty
+
+* Profile
+  - Dodać formularz zapisu oraz całą jego logikę
+
+* Cart 
+  - Stworzyć system Payout 
+
+  NOTE: Trzeba dodać Stripe na BE i FE aby to wykonać
+
+* Auth
+  - Reset hasła
+
+  NOTE: Wymaga dodania funkcji wysyłania wiadomości E-Mail

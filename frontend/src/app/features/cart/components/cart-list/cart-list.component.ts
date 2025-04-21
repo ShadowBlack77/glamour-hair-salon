@@ -5,6 +5,7 @@ import { CartState } from "../../store/cart.reducer";
 import { selectCart } from "../../store/cart.selector";
 import { Cart } from "../../models/cart.model";
 import { CurrencyPipe, NgOptimizedImage } from "@angular/common";
+import { updateProductCartQuantity } from "../../store/cart.actions";
 
 @Component({
   selector: 'app-cart-list',
@@ -32,6 +33,16 @@ export class CartListComponent implements OnInit, OnDestroy {
         console.log(err);
       }
     });
+  }
+
+  increase(id: string, quantity: number): void {
+    this._cartStore.dispatch(updateProductCartQuantity({ id, quantity: quantity + 1  }));
+  }
+
+  decrease(id: string, quantity: number): void {
+    if (quantity > 0) {
+      this._cartStore.dispatch(updateProductCartQuantity({ id, quantity: quantity - 1  }));
+    }
   }
 
   ngOnDestroy(): void {

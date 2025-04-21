@@ -5,6 +5,7 @@ export * from './forms/components/sign-up-form/sign-up-form.component';
 export * from './profile/profile.component';
 export * from './cart/components/cart-list/cart-list.component';
 export * from './cart/components/cart-button/cart-button.component';
+export * from './products/components/products-list/products-list.component';
 
 // RESOLVERS
 export * from './products/resolvers/load-products.resolver';

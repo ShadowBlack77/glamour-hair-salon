@@ -1,7 +1,7 @@
 import { inject, Injectable } from "@angular/core";
 import { CartService } from "../services/cart.service";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { addToCart, addToCartFailure, addToCartSucces, loadCart, loadCartFailure, loadCartSuccess } from "./cart.actions";
+import { addToCart, addToCartFailure, addToCartSucces, loadCart, loadCartFailure, loadCartSuccess, updateProductCartQuantity, updateProductCartQuantityFailure, updateProductCartQuantitySuccess } from "./cart.actions";
 import { catchError, map, of, switchMap } from "rxjs";
 import { Cart } from "../models/cart.model";
 import { HttpErrorResponse } from "@angular/common/http";
@@ -26,7 +26,7 @@ export class CartEffects {
         )
       })
     )
-  })
+  });
 
   addToCart$ = createEffect(() => {
     return this._actions$.pipe(
@@ -38,6 +38,22 @@ export class CartEffects {
           }),
           catchError((error: HttpErrorResponse) => {
             return of(addToCartFailure({ error }))
+          })
+        )
+      })
+    )
+  });
+
+  updateCartProductQuantity$ = createEffect(() => {
+    return this._actions$.pipe(
+      ofType(updateProductCartQuantity),
+      switchMap(({ id, quantity }) => {
+        return this._cartSevice.update(id, quantity).pipe(
+          map(() => {
+            return updateProductCartQuantitySuccess();
+          }),
+          catchError((error: HttpErrorResponse) => {
+            return of(updateProductCartQuantityFailure({ error }))
           })
         )
       })

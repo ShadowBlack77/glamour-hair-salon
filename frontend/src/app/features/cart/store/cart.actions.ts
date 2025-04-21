@@ -25,3 +25,17 @@ export const addToCartFailure = createAction(
   '[Cart] Add To Cart Failure',
   props<{ error: any }>()
 );
+
+export const updateProductCartQuantity = createAction(
+  '[Cart] Update Product Cart Quantity',
+  props<{ id: string, quantity: number }>()
+);
+
+export const updateProductCartQuantitySuccess = createAction(
+  '[Cart] Update Product Cart Quantity Success'
+);
+
+export const updateProductCartQuantityFailure = createAction(
+  '[Cart] Update Product Cart Quantity Failure',
+  props<{ error: any }>()
+);

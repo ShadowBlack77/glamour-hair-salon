@@ -1,0 +1,24 @@
+<div class="grid grid-cols-5 gap-4">
+  @for (product of products(); track product.id) {
+    <div class="border border-black rounded-md py-4">
+      <div class="flex justify-center">
+        <img 
+          [ngSrc]="product.imageUrl"
+          [alt]="product.name"
+          width="200"
+          height="200"
+          priority="lazy"
+        />
+      </div>
+      <div class="mb-3">
+        <h2 class="text-xl text-center">{{ product.name }}</h2>
+        <p class="text-center">{{ product.description }}</p>
+      </div>
+      <div class="flex justify-center">
+        <app-cart-button 
+          [product]="product"
+        />
+      </div>
+    </div>
+  }
+</div>
