@@ -12,6 +12,8 @@ import { productsReducer } from './features/products/store/products.reducer';
 import { ProductsEffects } from './features/products/store/products.effects';
 import { CartEffects } from './features/cart/store/cart.effects';
 import { cartReducer } from './features/cart/store/cart.reducer';
+import { payoutsReducer } from './features/payouts/store/payouts.reducer';
+import { PayoutsEffects } from './features/payouts/store/payouts.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,11 +21,13 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes), 
     provideStore({
       products: productsReducer,
-      cart: cartReducer
+      cart: cartReducer,
+      payouts: payoutsReducer
     }), 
     provideEffects([
       ProductsEffects,
-      CartEffects
+      CartEffects,
+      PayoutsEffects
     ]),
     provideHttpClient(withInterceptorsFromDi()),
     provideAnimations(),
@@ -39,7 +43,8 @@ export const appConfig: ApplicationConfig = {
       provide: ENV_CONFIG,
       useValue: {
         backendUrl: environemnt.backendUrl,
-        apiKey: environemnt.apiKey
+        apiKey: environemnt.apiKey,
+        stripePublicKey: environemnt.stripePublicKey
       }
     },
     {

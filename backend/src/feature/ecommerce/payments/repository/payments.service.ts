@@ -2,6 +2,7 @@ import { BadRequestException, Inject, Injectable, InternalServerErrorException }
 import { Response } from "express";
 import { FirebaseAdmin, InjectFirebaseAdmin } from "nestjs-firebase";
 import { STRIPE_HELPER, StripeHelper } from "../utils/stripe-helper.utils";
+import * as adminFirebase from 'firebase-admin';
 
 @Injectable()
 export class PaymentsService {
@@ -39,15 +40,55 @@ export class PaymentsService {
         }
       });
 
-      console.log(lineItems);
+      const session: any = await this._stripeHelper.createSession(userId, lineItems, products);
 
-      return res.status(200).json({ content: 'Work' });
+      return res.status(200).json({ id: session.id, totalAmount: totalAmount / 100 });
     } catch (error) {
       throw new InternalServerErrorException(error);
     }
   }
 
   async checkoutSession(res: Response, userId: string, sessionRequest: any) {
+    try {
+      const { sessionId } = sessionRequest;
+      const session = await this._stripeHelper.checkoutSession(sessionId);
 
+      if (session.payment_status === 'paid') {
+
+        const existingSessionQuery = await this._firebase.firestore.collection('orders')
+          .where('sessionId', '==', session.id)
+          .limit(1)
+          .get();
+        
+        if (!existingSessionQuery.empty) {
+          throw new BadRequestException('Session already processed');
+        }
+
+        const ordersDocRef = this._firebase.firestore.collection('orders').doc();
+        const cartDocRef = this._firebase.firestore.collection('cart').doc(userId);
+        const cartSnapshot = await cartDocRef.get();
+        const cartData = cartSnapshot.data();
+
+
+        const products = JSON.parse(session.metadata!.products);
+
+        await ordersDocRef.set({
+          userId: userId,
+          sessionId: session.id,
+          cart: products,
+          totalAmount: session.amount_total / 100,
+          createdAt: adminFirebase.firestore.Timestamp.now()
+        });
+
+        await cartDocRef.set({
+          ...cartData,
+          items: []
+        });
+      }
+
+      return res.status(200).json({ content: 'Thanks for shopping!' });
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
   }
 }

@@ -1,16 +1,14 @@
-* Home 
-  - Zmienić opis (4 kwadraty na galerią)
-
-* Store
-  - Dodać jeszcze 2-3 produkty
 
 * Profile
   - Dodać formularz zapisu oraz całą jego logikę
 
 * Cart 
-  - Stworzyć system Payout 
+  - Stworzyć system Payout +
+  - Po transakcji zakończonej sukcesem, czyści itemy z koszyka +
+  - Po transakcji zakończonej sukcesem, wysyła wiadomośc E-Mail z informacją zakupu
 
-  NOTE: Trzeba dodać Stripe na BE i FE aby to wykonać
+  NOTE: Trzeba dodać Stripe na BE i FE aby to wykonać +
+  NOTE: Wymaga dodania funkcji wysyłania wiadomości E-Mail
 
 * Auth
   - Reset hasła

@@ -28,6 +28,7 @@ export class CartService {
 
       return res.status(200).json({ content: cartDocData });
     } catch (error) {
+      console.log(error);
       throw new InternalServerErrorException(error);
     }
   }

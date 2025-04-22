@@ -21,6 +21,8 @@ export class PaymentsController {
   @Post('/checkout-session')
   @HttpCode(HttpStatus.OK)
   public checkoutSuccess(@Res() res: Response, @Body() sessionDto: any) {
+    const userId = findUserOrThrowError(res);
 
+    return this._paymentsService.checkoutSession(res, userId, sessionDto);
   }
 }

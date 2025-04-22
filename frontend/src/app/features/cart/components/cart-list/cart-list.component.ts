@@ -4,15 +4,18 @@ import { Subject, takeUntil } from "rxjs";
 import { CartState } from "../../store/cart.reducer";
 import { selectCart } from "../../store/cart.selector";
 import { Cart } from "../../models/cart.model";
-import { CurrencyPipe, NgOptimizedImage } from "@angular/common";
+import { CommonModule, CurrencyPipe, NgOptimizedImage } from "@angular/common";
 import { updateProductCartQuantity } from "../../store/cart.actions";
+import { PayoutsButtonComponent } from "../../../payouts/components/payouts-button/payouts-button.component";
 
 @Component({
   selector: 'app-cart-list',
   templateUrl: './cart-list.component.html',
   imports: [
     CurrencyPipe,
-    NgOptimizedImage
+    CommonModule,
+    NgOptimizedImage,
+    PayoutsButtonComponent
   ]
 })
 export class CartListComponent implements OnInit, OnDestroy {

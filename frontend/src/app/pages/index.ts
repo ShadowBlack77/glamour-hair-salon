@@ -8,6 +8,8 @@ export * from './user/auth/sign-up/sign-up-page.component';
 export * from './user/root/not-found/not-found-page.component';
 export * from './user/root/cart/cart-page.component';
 export * from './user/root/profile/profile-page.component';
+export * from './user/root/purchase-success/purchase-success-page.component';
+export * from './user/root/purchase-cancel/purchase-cancel-page.component';
 
 // Admin
 export * from './admin/admin-page.component';

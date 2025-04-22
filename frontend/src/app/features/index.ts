@@ -6,7 +6,9 @@ export * from './profile/profile.component';
 export * from './cart/components/cart-list/cart-list.component';
 export * from './cart/components/cart-button/cart-button.component';
 export * from './products/components/products-list/products-list.component';
+export * from './payouts/components/payouts-button/payouts-button.component';
 
 // RESOLVERS
 export * from './products/resolvers/load-products.resolver';
 export * from './cart/resolver/load-cart.resolver';
+export * from './payouts/resolvers/save-order.resolver';
