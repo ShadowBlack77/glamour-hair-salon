@@ -1,6 +1,7 @@
 
 * Profile
-  - Dodać formularz zapisu oraz całą jego logikę
+  - Dodać formularz zapisu oraz całą jego logikę'
+  - Jeżeli user już jest zapisany to wyświetli mu o tym informację
 
 * Cart 
   - Stworzyć system Payout +

@@ -28,6 +28,25 @@ export class ProfileComponent {
       validators: [
         Validators.required
       ]
+    }),
+    'email': new FormControl({
+      value: '',
+      disabled: false
+    }, {
+      nonNullable: true,
+      validators: [
+        Validators.email,
+        Validators.required
+      ]
+    }),
+    'phoneNumber': new FormControl({
+      value: '',
+      disabled: false
+    }, {
+      nonNullable: true,
+      validators: [
+        Validators.required
+      ]
     })
   })
 }
