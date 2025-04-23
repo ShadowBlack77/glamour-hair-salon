@@ -4,6 +4,7 @@ import { AuthService } from './repository/auth.service';
 import { FIREBASE_HELPER, FirebaseHelper } from './utils/firebase-helper.utils';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './guards/auth.guard';
+import { MailService } from 'src/feature/mail/repository/mail.service';
 
 @Module({
   controllers: [AuthController],
@@ -16,7 +17,8 @@ import { AuthGuard } from './guards/auth.guard';
     {
       provide: APP_GUARD,
       useClass: AuthGuard
-    }
+    },
+    MailService
   ]
 })
 export class AuthModule {}

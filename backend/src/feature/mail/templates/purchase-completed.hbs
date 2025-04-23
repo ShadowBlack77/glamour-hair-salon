@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Glamour - Purchase Completed</title>
+
+  <style>
+    body {
+      background-color: #fff;
+      color: #000;
+      font-family: sans-serif;
+      padding: 24px;
+    }
+
+    .container {
+      border: 1px solid #000;
+      padding: 24px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .title {
+      text-align: center;
+    }
+
+    a {
+      color: #000;
+      text-decoration: none;
+      font-style: italic;
+    }
+
+    a:hover {
+      border-bottom: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div>
+      <h1 class="title">Welcome in Glamour - Your Beauty Salon!</h1>
+      <p>Thanks for purchase our products! Order Number - {{ orderId }}</p>
+    </div>
+    <div>
+      <p>
+        Order Status: <b>Pending</b>
+      </p>
+    </div>
+  </div>
+</body>
+</html>

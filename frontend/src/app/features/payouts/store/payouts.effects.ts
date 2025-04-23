@@ -4,11 +4,13 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { createCheckoutSession, createCheckoutSessionFailure, createCheckoutSessionSuccess, saveCheckoutOrder, saveCheckoutOrderFailure, saveCheckoutOrderSuccess } from "./payouts.actions";
 import { catchError, map, of, switchMap } from "rxjs";
 import { HttpErrorResponse } from "@angular/common/http";
+import { Router } from "@angular/router";
 
 @Injectable()
 export class PayoutsEffects {
 
   private readonly _payoutsService: PayoutsService = inject(PayoutsService);
+  private readonly _router: Router = inject(Router);
   private readonly _actions$: Actions = inject(Actions);
 
   createCheckoutSession$ = createEffect(() => {
@@ -36,6 +38,8 @@ export class PayoutsEffects {
             return saveCheckoutOrderSuccess()
           }),
           catchError((error: HttpErrorResponse) => {
+            this._router.navigate(['/']);
+
             return of(saveCheckoutOrderFailure({ error }));
           })
         )

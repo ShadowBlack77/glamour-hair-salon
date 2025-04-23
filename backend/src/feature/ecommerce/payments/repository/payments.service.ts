@@ -3,13 +3,15 @@ import { Response } from "express";
 import { FirebaseAdmin, InjectFirebaseAdmin } from "nestjs-firebase";
 import { STRIPE_HELPER, StripeHelper } from "../utils/stripe-helper.utils";
 import * as adminFirebase from 'firebase-admin';
+import { MailService } from "src/feature/mail/repository/mail.service";
 
 @Injectable()
 export class PaymentsService {
 
   constructor(
     @InjectFirebaseAdmin() private readonly _firebase: FirebaseAdmin,
-    @Inject(STRIPE_HELPER) private readonly _stripeHelper: StripeHelper
+    @Inject(STRIPE_HELPER) private readonly _stripeHelper: StripeHelper,
+    private readonly _mailService: MailService
   ) {}
 
   async createCheckoutSession(res: Response, userId: string, checkoutDto: any) {
@@ -79,6 +81,8 @@ export class PaymentsService {
           totalAmount: session.amount_total / 100,
           createdAt: adminFirebase.firestore.Timestamp.now()
         });
+
+        this._mailService.sendMail(session.customer_details.email, 'Purchased Completed', 'purchase-completed', { orderId: ordersDocRef.id });
 
         await cartDocRef.set({
           ...cartData,

@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { AboutPageComponent, AdminPageComponent, CartPageComponent, DashboardPageComponent, HomePageComponent, NotFoundPageComponent, ProductsPageComponent, ProfilePageComponent, PurchaseCancelPageComponent, PurchaseSuccessPageComponent, RootPageComponent, SignInPageComponent, SignUpPageComponent } from './pages';
-import { LoadCartResolver, LoadProductsResolver, SaveOrderResolver } from './features';
+import { AboutPageComponent, AdminPageComponent, CartPageComponent, DashboardPageComponent, HomePageComponent, NotFoundPageComponent, ProductsPageComponent, ProfilePageComponent, PurchaseCancelPageComponent, PurchaseSuccessPageComponent, ResetPasswordPageComponent, RootPageComponent, SignInPageComponent, SignUpPageComponent } from './pages';
+import { LoadBookingResolver, LoadCartResolver, LoadProductsResolver, SaveOrderResolver } from './features';
 import { AdminRoleGuard, AuthGuard, ProtectGuard, UserRoleGuard } from './core';
 
 export const routes: Routes = [
@@ -33,6 +33,7 @@ export const routes: Routes = [
         component: ProductsPageComponent
       },
       {
+        resolve: [LoadBookingResolver],
         path: 'profile',
         canActivate: [ProtectGuard],
         component: ProfilePageComponent
@@ -69,6 +70,10 @@ export const routes: Routes = [
       {
         path: 'sign-up',
         component: SignUpPageComponent
+      },
+      {
+        path: 'reset-password',
+        component: ResetPasswordPageComponent
       }
     ]
   },

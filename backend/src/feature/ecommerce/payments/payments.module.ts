@@ -2,6 +2,7 @@ import { Module } from "@nestjs/common";
 import { PaymentsController } from "./controller/payments.controller";
 import { PaymentsService } from "./repository/payments.service";
 import { STRIPE_HELPER, StripeHelper } from "./utils/stripe-helper.utils";
+import { MailService } from "src/feature/mail/repository/mail.service";
 
 @Module({
   controllers: [
@@ -12,7 +13,8 @@ import { STRIPE_HELPER, StripeHelper } from "./utils/stripe-helper.utils";
     {
       provide: STRIPE_HELPER,
       useClass: StripeHelper
-    }
+    },
+    MailService
   ]
 })
 export class PaymentsModule {}

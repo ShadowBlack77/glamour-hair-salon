@@ -67,6 +67,10 @@ export class AuthService {
     });
   }
 
+  resetPassword(email: string): Observable<unknown> {
+    return this._httpClient.post(`${this._envConfig.backendUrl}/auth/reset-password`, { email });
+  }
+
   private profile(): Observable<any> {
     return this._httpClient.get(`${this._envConfig.backendUrl}/auth/profile`, { withCredentials: true }).pipe(
       take(1),

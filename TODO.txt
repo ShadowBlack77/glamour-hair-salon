@@ -1,17 +1,2 @@
-
-* Profile
-  - Dodać formularz zapisu oraz całą jego logikę'
-  - Jeżeli user już jest zapisany to wyświetli mu o tym informację
-
-* Cart 
-  - Stworzyć system Payout +
-  - Po transakcji zakończonej sukcesem, czyści itemy z koszyka +
-  - Po transakcji zakończonej sukcesem, wysyła wiadomośc E-Mail z informacją zakupu
-
-  NOTE: Trzeba dodać Stripe na BE i FE aby to wykonać +
-  NOTE: Wymaga dodania funkcji wysyłania wiadomości E-Mail
-
-* Auth
-  - Reset hasła
-
-  NOTE: Wymaga dodania funkcji wysyłania wiadomości E-Mail
+** Dodać walidację wszystkich formularzy
+** Dodać loadery (Produty, Formularz wysyłania bookingu, Ładowanie statusu bookingu, Wysyłanie wiadomość z resetem hasła)

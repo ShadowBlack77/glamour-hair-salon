@@ -2,13 +2,15 @@ import { Inject, Injectable, InternalServerErrorException, UnauthorizedException
 import { FirebaseAdmin, InjectFirebaseAdmin } from 'nestjs-firebase';
 import { FIREBASE_HELPER, FirebaseHelper } from '../utils/firebase-helper.utils';
 import { Response } from 'express';
+import { MailService } from 'src/feature/mail/repository/mail.service';
 
 @Injectable()
 export class AuthService {
 
   constructor(
     @InjectFirebaseAdmin() private readonly _firebase: FirebaseAdmin,
-    @Inject(FIREBASE_HELPER) private readonly _firebaseHelper: FirebaseHelper
+    @Inject(FIREBASE_HELPER) private readonly _firebaseHelper: FirebaseHelper,
+    private readonly _mailService: MailService
   ) {}
 
   async signIn(res: Response, signInDto: any): Promise<any> {
@@ -75,5 +77,15 @@ export class AuthService {
     const decodedToken = await this._firebase.auth.verifyIdToken(accessToken);
 
     return decodedToken;
+  }
+
+  async resetPassword(resetPasswordDto: any) {
+    const { email } = resetPasswordDto;
+
+    const resetLink = await this._firebase.auth.generatePasswordResetLink(email);
+
+    this._mailService.sendMail(email, 'Reset Password', 'reset-password', { link: resetLink });
+
+    return { content: 'Email sended' };
   }
 }

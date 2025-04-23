@@ -10,6 +10,7 @@ export * from './user/root/cart/cart-page.component';
 export * from './user/root/profile/profile-page.component';
 export * from './user/root/purchase-success/purchase-success-page.component';
 export * from './user/root/purchase-cancel/purchase-cancel-page.component';
+export * from './user/auth/reset-password/reset-password-page.component';
 
 // Admin
 export * from './admin/admin-page.component';

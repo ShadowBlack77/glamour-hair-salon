@@ -14,6 +14,8 @@ import { CartEffects } from './features/cart/store/cart.effects';
 import { cartReducer } from './features/cart/store/cart.reducer';
 import { payoutsReducer } from './features/payouts/store/payouts.reducer';
 import { PayoutsEffects } from './features/payouts/store/payouts.effects';
+import { BookingEffects } from './features/booking/store/booking.effects';
+import { bookingReducer } from './features/booking/store/booking.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,12 +24,14 @@ export const appConfig: ApplicationConfig = {
     provideStore({
       products: productsReducer,
       cart: cartReducer,
-      payouts: payoutsReducer
+      payouts: payoutsReducer,
+      booking: bookingReducer
     }), 
     provideEffects([
       ProductsEffects,
       CartEffects,
-      PayoutsEffects
+      PayoutsEffects,
+      BookingEffects
     ]),
     provideHttpClient(withInterceptorsFromDi()),
     provideAnimations(),

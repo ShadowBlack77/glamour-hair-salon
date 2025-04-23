@@ -39,4 +39,11 @@ export class AuthController {
 
     return res.status(200).json({ content: res.locals.user });
   }
+
+  @Public()
+  @Post('/reset-password')
+  @HttpCode(HttpStatus.OK)
+  resetPassword(@Body() resetPasswordDto: any) {
+    return this._authService.resetPassword(resetPasswordDto);
+  }
 }
