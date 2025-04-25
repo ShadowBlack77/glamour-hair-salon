@@ -12,14 +12,17 @@ import { Booking } from "../../models/booking.model";
 export class ActivedBookingComponent implements OnInit, OnDestroy {
 
   private readonly _bookingStore: Store<BookingState> = inject(Store);
-  private readonly _destroy$: Subject<void> = new Subject<void>()
+  private readonly _destroy$: Subject<void> = new Subject<void>();
 
+  readonly isLoading: WritableSignal<boolean> = signal(true);
   readonly userBooking: WritableSignal<Booking | undefined> = signal(undefined);
 
   ngOnInit(): void {
     this._bookingStore.select(selectBooking).pipe(
       takeUntil(this._destroy$),
       map((booking) => {
+        this.isLoading.set(booking.loading);
+        
         return booking.data;
       })
     ).subscribe({

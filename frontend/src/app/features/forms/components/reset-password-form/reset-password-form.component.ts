@@ -1,6 +1,6 @@
-import { Component, inject } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { Component, inject, signal, WritableSignal } from "@angular/core";
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
 import { AuthService } from "@glamour/core";
 import { take } from "rxjs";
 
@@ -8,6 +8,7 @@ import { take } from "rxjs";
   selector: 'app-reset-password-form',
   templateUrl: './reset-password-form.component.html',
   imports: [
+    CommonModule,
     ReactiveFormsModule,
     FormsModule
   ]
@@ -15,7 +16,9 @@ import { take } from "rxjs";
 export class ResetPasswordFormComponent {
 
   private readonly _authService: AuthService = inject(AuthService);
-  private readonly _router: Router = inject(Router);
+
+  readonly isFormSubmitted: WritableSignal<boolean> = signal(false);
+  readonly successfullySubmitted: WritableSignal<string | undefined> = signal(undefined);
 
   readonly resetPasswordForm: FormGroup = new FormGroup({
     email: new FormControl({
@@ -31,14 +34,21 @@ export class ResetPasswordFormComponent {
 
   onSubmit(): void {
     if (this.resetPasswordForm.valid) {
+      this.isFormSubmitted.set(true);
+      this.successfullySubmitted.set(undefined);
+
       this._authService.resetPassword(this.resetPasswordForm.getRawValue().email).pipe(
         take(1)
       ).subscribe({
         next: (data) => {
-          console.log(data);
+          const { content } = data;
+          this.successfullySubmitted.set(content);
+          this.isFormSubmitted.set(false);
         },
         error: (err) => {
           console.log(err);
+          this.successfullySubmitted.set(undefined);
+          this.isFormSubmitted.set(false);
         }
       })
     }

@@ -1,2 +1,2 @@
 ** Dodać walidację wszystkich formularzy
-** Dodać loadery (Produty, Formularz wysyłania bookingu, Ładowanie statusu bookingu, Wysyłanie wiadomość z resetem hasła)
+** Dodać loadery (Formularz wysyłania bookingu)

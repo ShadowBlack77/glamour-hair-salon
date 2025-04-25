@@ -61,6 +61,11 @@ export const routes: Routes = [
   },
   {
     path: 'auth',
+    redirectTo: 'auth/sign-in',
+    pathMatch: 'full'
+  },
+  {
+    path: 'auth',
     canActivate: [AuthGuard],
     children: [
       {
