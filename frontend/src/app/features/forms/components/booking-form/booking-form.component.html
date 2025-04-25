@@ -31,7 +31,14 @@
       >
     </div>
     <div>
-      <button type="submit" class="bg-black text-white w-full rounded-md py-1 text-lg">Booking</button>
+      <button 
+        [disabled]="!bookingForm.valid"
+        [ngClass]="{
+          'bg-black/40': !bookingForm.valid
+        }"
+        type="submit" 
+        class="bg-black text-white w-full rounded-md py-1 text-lg"
+      >Booking</button>
     </div>
   </form>
 </div>

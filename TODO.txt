@@ -1,2 +1,0 @@
-** Dodać walidację wszystkich formularzy
-** Dodać loadery (Formularz wysyłania bookingu)

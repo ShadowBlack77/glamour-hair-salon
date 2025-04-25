@@ -1,5 +1,5 @@
-<header class="flex justify-between px-32 sticky bg-black w-full text-gray-400 top-0 left-0 py-2 items-center z-20">
-  <nav>
+<header class="flex flex-col md:flex-row justify-between px-4 md:px-16 xl:px-32 sticky bg-black w-full text-gray-400 top-0 left-0 py-2 items-center z-20">
+  <nav class="order-2 md:order-1 mb-2 md:mb-0">
     <ul class="flex">
       <li class="me-2">
         <a routerLink="/home" routerLinkActive="active-link" [ariaCurrentWhenActive]="true">Home</a>
@@ -12,15 +12,12 @@
       </li>
     </ul>
   </nav>
-  <div>
+
+  <div class="order-1 md:order-2 mb-2 md:mb-0">
     <h1 class="text-4xl glamour-title text-white">Glamour</h1>
   </div>
-  <div>
+
+  <div class="order-3">
     <ng-content />
   </div>
 </header>
-
-<!-- -translate-x-[300px]
-<div class="top-0 left-0 z-30 h-screen bg-black/30 w-[300px] text-white absolute" style="backdrop-filter: blur(4px);">
-  <h2>Nav Menu</h2>
-</div> -->

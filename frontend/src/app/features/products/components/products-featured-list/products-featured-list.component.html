@@ -1,5 +1,5 @@
 <div [ngClass]="{
-  'grid grid-cols-5 gap-4' : (products$ | async)!.length > 0
+  'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4' : (products$ | async)!.length > 0
 }">
   @for (product of products$ | async; track product.id) {
     <div class="p-4 border border-black rounded-md">

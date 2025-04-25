@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, inject } from "@angular/core";
+import { Component, inject, signal, WritableSignal } from "@angular/core";
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Store } from "@ngrx/store";
 import { BookingState } from "../../../booking/store/booking.reducer";
@@ -17,6 +17,8 @@ import { saveUserBooking } from "../../../booking/store/booking.actions";
 export class BookingFormComponent {
 
   private readonly _bookingStore: Store<BookingState> = inject(Store);
+
+  readonly isFormSubmitted: WritableSignal<boolean> = signal(false);
 
   readonly bookingForm: FormGroup = new FormGroup({
     'username': new FormControl({
