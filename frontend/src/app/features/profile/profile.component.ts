@@ -3,7 +3,6 @@ import { Component, inject } from "@angular/core";
 import { AuthService, User } from "@glamour/core";
 import { Observable } from "rxjs";
 import { ActivedBookingComponent } from "../booking/components/actived-booking/actived-booking.component";
-import { BookingFormComponent } from "../forms/components/booking-form/booking-form.component";
 
 @Component({
   selector: 'app-profile',
@@ -11,7 +10,6 @@ import { BookingFormComponent } from "../forms/components/booking-form/booking-f
   imports: [
     CommonModule,
     ActivedBookingComponent,
-    BookingFormComponent
 ]
 })
 export class ProfileComponent {
