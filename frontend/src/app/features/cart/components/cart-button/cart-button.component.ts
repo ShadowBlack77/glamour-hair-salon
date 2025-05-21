@@ -3,10 +3,11 @@ import { Product } from "../../../products/model/product.model";
 import { addToCart } from "../../store/cart.actions";
 import { CartState } from "../../store/cart.reducer";
 import { Store } from "@ngrx/store";
-import { map, Subject, takeUntil } from "rxjs";
+import { map, Subject, take, takeUntil } from "rxjs";
 import { selectCart } from "../../store/cart.selector";
 import { CommonModule } from "@angular/common";
 import { Router } from "@angular/router";
+import { AuthService } from "@glamour/core";
 
 @Component({
   selector: 'app-cart-button',
@@ -18,6 +19,7 @@ import { Router } from "@angular/router";
 export class CartButtonComponent implements OnInit, OnDestroy {
 
   private readonly _cartStore: Store<CartState> = inject(Store);
+  private readonly _authService: AuthService = inject(AuthService);
   private readonly _destroy$: Subject<void> = new Subject<void>();
   private readonly _router: Router = inject(Router);
 
@@ -38,13 +40,28 @@ export class CartButtonComponent implements OnInit, OnDestroy {
   }
 
   addToCart(): void {
-    if (this.isProductInCart()) {
-      this._router.navigate(['/cart']);
-      
-      return;
-    }
+    this._authService.user$.pipe(
+      take(1)
+    ).subscribe({
+      next: (user) => {
+        if (user) {
+          if (this.isProductInCart()) {
+            this._router.navigate(['/cart']);
+            
+            return;
+          }
 
-    this._cartStore.dispatch(addToCart({ product: this.product() }));
+          this._cartStore.dispatch(addToCart({ product: this.product() }));
+
+          return;
+        }
+
+        this._router.navigate(['/']);
+      },
+      error: () => {
+        this._router.navigate(['/']);
+      }
+    })
   }
 
   ngOnDestroy(): void {
