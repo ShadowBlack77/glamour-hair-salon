@@ -56,10 +56,10 @@ export class CartButtonComponent implements OnInit, OnDestroy {
           return;
         }
 
-        this._router.navigate(['/']);
+        this._router.navigate(['/auth/sign-in']);
       },
       error: () => {
-        this._router.navigate(['/']);
+        this._router.navigate(['/auth/sign-in']);
       }
     })
   }

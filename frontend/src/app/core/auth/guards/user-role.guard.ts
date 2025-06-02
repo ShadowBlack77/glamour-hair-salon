@@ -13,7 +13,6 @@ export class UserRoleGuard {
 
   canActivate(): Observable<boolean> {
     return this._authService.user$.pipe(
-      take(1),
       map((user) => {
         if (!user || user.role !== 'admin') {
           return true;

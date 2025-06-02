@@ -13,7 +13,6 @@ export class AuthGuard {
 
   canActivate(): Observable<boolean> {
     return this._authService.user$.pipe(
-      take(1),
       map((user) => {
         if (user) {
           this._router.navigate(['/']);

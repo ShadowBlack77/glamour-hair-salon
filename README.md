@@ -1,0 +1,7 @@
+- Zmiana stylu wyświetlania komponentów w app.routes component => loadComponent
+- zmiana injectowania z @inject na inject()
+- Refactor struktury projektu (Rozdzielić na libs)
+- Prosty widok admina
+- Na BE zejść ze struktury features/reszta. Od razu w src zrobić folder app i w nim auth, account, ecommerce itd
+- Dodać API-Key w nagłówku x-api-key
+- Dockerfile (Pamiętając o zmianie environemtns na FE)

@@ -3,6 +3,7 @@ import { BehaviorSubject, map, Observable, switchMap, take, tap } from "rxjs";
 import { User } from "../models/user.model";
 import { HttpClient } from "@angular/common/http";
 import { ENV_CONFIG, EnvConfig } from "../../env/env.tokens";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { ENV_CONFIG, EnvConfig } from "../../env/env.tokens";
 export class AuthService {
 
   private readonly _httpClient: HttpClient = inject(HttpClient);
+  private readonly _router: Router = inject(Router);
 
   readonly user$: BehaviorSubject<User | undefined> = new BehaviorSubject<User | undefined>(undefined);
 
@@ -63,6 +65,7 @@ export class AuthService {
     ).subscribe({
       next: () => {
         this.user$.next(undefined);
+        this._router.navigateByUrl('/');
       }
     });
   }
