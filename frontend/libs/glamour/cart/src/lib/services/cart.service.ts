@@ -28,8 +28,4 @@ export class CartService {
   update(id: string, qunatity: number): Observable<unknown> {
     return this._httpClient.put(`${this._envConfig.backendUrl}/cart/${id}`, { quantity:  qunatity }, { withCredentials: true });
   }
-
-  remove(): void {
-
-  }
 }

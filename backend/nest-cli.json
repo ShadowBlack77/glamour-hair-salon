@@ -6,7 +6,7 @@
     "deleteOutDir": true,
     "assets": [
       "/assets/**",
-      "/feature/mail/templates/**"
+      "/app/mail/templates/**"
     ]
   }
 }

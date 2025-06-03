@@ -58,12 +58,12 @@ export class LoginFormComponent {
           this.isFormSubmitted.set(false);
 
           if (user!.role === 'user') {
-            this._router.navigate(['/']);
+            this._router.navigateByUrl('/');
 
             return;
           }
 
-          this._router.navigate(['/admin/dashboard']);
+          this._router.navigateByUrl('/admin/dashboard');
           
           return;
         },

@@ -70,7 +70,7 @@ export class RegisterFormComponent {
         next: () => {
           this.isFormSubmitted.set(true);
           
-          this._router.navigate(['/auth/sign-in']);
+          this._router.navigateByUrl('/auth/sign-in');
         },
         error: (errorResponse: HttpErrorResponse) => {
           this.registerError.set(errorResponse.error.message);
