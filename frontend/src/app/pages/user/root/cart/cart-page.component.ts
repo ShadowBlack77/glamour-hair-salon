@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { CartListComponent } from "@glamour/features";
+import { CartListComponent } from "@lib/glamour/cart";
 
 @Component({
   selector: 'app-cart-page',

@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { ProductsListComponent } from "@glamour/features";
+import { ProductsListComponent } from "@lib/glamour/products";
 
 @Component({
   selector: 'app-products-page',

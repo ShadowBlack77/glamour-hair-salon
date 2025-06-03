@@ -18,17 +18,44 @@
     "target": "ES2022",
     "module": "ES2022",
     "paths": {
-      "@glamour/core": [
-        "./src/app/core//index.ts"
+      "@lib/core/environments": [
+        "./libs/core/environments/src/index.ts"
       ],
-      "@glamour/features": [
-        "./src/app/features/index.ts"
+      "@lib/core/loadable": [
+        "./libs/core/loadable/src/index.ts"
       ],
-      "@glamour/pages": [
-        "./src/app/pages/index.ts"
+      "@lib/auth": [
+        "./libs/auth/src/index.ts"
       ],
-      "@glamour/shared": [
-        "./src/app/shared/index.ts"
+      "@lib/glamour/booking": [
+        "./libs/glamour/booking/src/index.ts"
+      ],
+      "@lib/glamour/cart": [
+        "./libs/glamour/cart/src/index.ts"
+      ],
+      "@lib/glamour/products": [
+        "./libs/glamour/products/src/index.ts"
+      ],
+      "@lib/glamour/payouts": [
+        "./libs/glamour/payouts/src/index.ts"
+      ],
+      "@lib/glamour/profile": [
+        "./libs/glamour/profile/src/index.ts"
+      ],
+      "@lib/shared/header": [
+        "./libs/shared/header/src/index.ts"
+      ],
+      "@lib/shared/footer": [
+        "./libs/shared/footer/src/index.ts"
+      ],
+      "@lib/shared/animations": [
+        "./libs/shared/animations/src/index.ts"
+      ],
+      "@lib/shared/validators": [
+        "./libs/shared/validators/src/index.ts"
+      ],
+      "@lib/shared/http": [
+        "./libs/shared/http/src/index.ts"
       ]
     }
   },

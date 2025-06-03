@@ -1,7 +1,9 @@
 import { Routes } from '@angular/router';
-import { AboutPageComponent, AdminPageComponent, CartPageComponent, DashboardPageComponent, HomePageComponent, NotFoundPageComponent, ProductsPageComponent, ProfilePageComponent, PurchaseCancelPageComponent, PurchaseSuccessPageComponent, ResetPasswordPageComponent, RootPageComponent, SignInPageComponent, SignUpPageComponent } from './pages';
-import { LoadBookingResolver, LoadCartResolver, LoadProductsResolver, SaveOrderResolver } from './features';
-import { AdminRoleGuard, AuthGuard, ProtectGuard, UserRoleGuard } from './core';
+import { AdminRoleGuard, AuthGuard, ProtectGuard, UserRoleGuard } from '@lib/auth';
+import { LoadBookingResolver } from '@lib/glamour/booking';
+import { LoadCartResolver } from '@lib/glamour/cart';
+import { SaveOrderResolver } from '@lib/glamour/payouts';
+import { LoadProductsResolver } from '@lib/glamour/products';
 
 export const routes: Routes = [
   {
@@ -11,7 +13,6 @@ export const routes: Routes = [
   },
   {
     path: '',
-    component: RootPageComponent,
     canActivate: [
       UserRoleGuard,
     ],
@@ -19,43 +20,44 @@ export const routes: Routes = [
       LoadProductsResolver,
       LoadCartResolver
     ],
+    loadComponent: () => import('./pages/user/root/root-page.component').then((c) => c.RootPageComponent),
     children: [
       {
         path: 'home',
-        component: HomePageComponent
+        loadComponent: () => import('./pages/user/root/home/home-page.component').then((c) => c.HomePageComponent)
       },
       {
         path: 'about',
-        component: AboutPageComponent
+        loadComponent: () => import('./pages/user/root/about/about-page.component').then((c) => c.AboutPageComponent)
       },
       {
         path: 'store',
-        component: ProductsPageComponent
+        loadComponent: () => import('./pages/user/root/products/products-page.component').then((c) => c.ProductsPageComponent)
       },
       {
-        resolve: [LoadBookingResolver],
         path: 'profile',
+        resolve: [LoadBookingResolver],
         canActivate: [ProtectGuard],
-        component: ProfilePageComponent
+        loadComponent: () => import('./pages/user/root/profile/profile-page.component').then((c) => c.ProfilePageComponent)
       },
       {
+        path: 'cart',
         resolve: [
           LoadCartResolver
         ],
-        path: 'cart',
         canActivate: [ProtectGuard],
-        component: CartPageComponent
+        loadComponent: () => import('./pages/user/root/cart/cart-page.component').then((c) => c.CartPageComponent)
       },
       {
         resolve: [
           SaveOrderResolver,
         ],
         path: 'purchase-success',
-        component: PurchaseSuccessPageComponent
+        loadComponent: () => import('./pages/user/root/purchase-success/purchase-success-page.component').then((c) => c.PurchaseSuccessPageComponent)
       },
       {
         path: 'purchase-cancel',
-        component: PurchaseCancelPageComponent
+        loadComponent: () => import('./pages/user/root/purchase-cancel/purchase-cancel-page.component').then((c) => c.PurchaseCancelPageComponent)
       }
     ]
   },
@@ -70,31 +72,31 @@ export const routes: Routes = [
     children: [
       {
         path: 'sign-in',
-        component: SignInPageComponent
+        loadComponent: () => import('./pages/user/auth/sign-in/sign-in-page.component').then((c) => c.SignInPageComponent)
       },
       {
         path: 'sign-up',
-        component: SignUpPageComponent
+        loadComponent: () => import('./pages/user/auth/sign-up/sign-up-page.component').then((c) => c.SignUpPageComponent)
       },
       {
         path: 'reset-password',
-        component: ResetPasswordPageComponent
+        loadComponent: () => import('./pages/user/auth/reset-password/reset-password-page.component').then((c) => c.ResetPasswordPageComponent)
       }
     ]
   },
   {
     path: 'admin',
-    component: AdminPageComponent,
     canActivate: [AdminRoleGuard],
+    loadComponent: () => import('./pages/admin/admin-page.component').then((c) => c.AdminPageComponent),
     children: [
       {
         path: 'dashboard',
-        component: DashboardPageComponent
+        loadComponent: () => import('./pages/admin/dashboard/dashboard-page.component').then((c) => c.DashboardPageComponent)
       }
     ]
   },
   {
     path: '**',
-    component: NotFoundPageComponent
+    loadComponent: () => import('./pages/user/root/not-found/not-found-page.component').then((c) => c.NotFoundPageComponent)
   }
 ];

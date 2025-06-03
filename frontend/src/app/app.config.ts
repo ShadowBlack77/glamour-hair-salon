@@ -4,18 +4,19 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
-import { AuthInterceptor, AuthService, ENV_CONFIG } from '@glamour/core';
 import { environemnt } from '../env/environments';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { productsReducer } from './features/products/store/products.reducer';
-import { ProductsEffects } from './features/products/store/products.effects';
-import { CartEffects } from './features/cart/store/cart.effects';
-import { cartReducer } from './features/cart/store/cart.reducer';
-import { payoutsReducer } from './features/payouts/store/payouts.reducer';
-import { PayoutsEffects } from './features/payouts/store/payouts.effects';
-import { BookingEffects } from './features/booking/store/booking.effects';
-import { bookingReducer } from './features/booking/store/booking.reducer';
+import { productsReducer } from '../../libs/glamour/products/src/lib/store/products.reducer';
+import { ProductsEffects } from '../../libs/glamour/products/src/lib/store/products.effects';
+import { ENV_CONFIG } from '@lib/core/environments';
+import { AuthInterceptor, AuthService } from '@lib/auth';
+import { bookingReducer } from '../../libs/glamour/booking/src/lib/store/booking.reducer';
+import { BookingEffects } from '../../libs/glamour/booking/src/lib/store/booking.effects';
+import { cartReducer } from '../../libs/glamour/cart/src/lib/store/cart.reducer';
+import { CartEffects } from '../../libs/glamour/cart/src/lib/store/cart.effects';
+import { payoutsReducer } from '../../libs/glamour/payouts/src/lib/store/payouts.reducer';
+import { PayoutsEffects } from '../../libs/glamour/payouts/src/lib/store/payouts.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [

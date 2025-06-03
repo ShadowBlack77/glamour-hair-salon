@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, CUSTOM_ELEMENTS_SCHEMA, signal, WritableSignal } from "@angular/core";
-import { ProductsFeaturedListComponent } from "@glamour/features";
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { InViewportDirective } from "@glamour/shared";
 import { interval, map, takeWhile } from "rxjs";
 import { RouterLink } from "@angular/router";
+import { ProductsFeaturedListComponent } from "@lib/glamour/products";
+import { InViewportDirective } from "@lib/shared/animations";
 
 @Component({
   selector: 'app-home-page',

@@ -1,4 +1,3 @@
-- Zmiana stylu wyświetlania komponentów w app.routes component => loadComponent
 - zmiana injectowania z @inject na inject()
 - Refactor struktury projektu (Rozdzielić na libs)
 - Prosty widok admina

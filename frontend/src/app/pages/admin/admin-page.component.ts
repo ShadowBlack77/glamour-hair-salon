@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { RouterModule } from "@angular/router";
-import { AuthHeaderSegmentComponent } from "@glamour/core";
-import { HeaderComponent } from "@glamour/shared";
+import { AuthHeaderComponent } from "@lib/auth";
+import { HeaderComponent } from "@lib/shared/header";
 
 @Component({
   selector: 'app-admin-page',
@@ -9,7 +9,7 @@ import { HeaderComponent } from "@glamour/shared";
   imports: [
     RouterModule, 
     HeaderComponent, 
-    AuthHeaderSegmentComponent
+    AuthHeaderComponent
   ]
 })
 export class AdminPageComponent {}

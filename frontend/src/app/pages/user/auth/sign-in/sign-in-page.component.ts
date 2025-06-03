@@ -1,12 +1,12 @@
 import { NgOptimizedImage } from "@angular/common";
 import { Component } from "@angular/core";
-import { SignInFormComponent } from "@glamour/features";
+import { LoginFormComponent } from "@lib/auth";
 
 @Component({
-  selector: 'app-sign-in-page',
+  selector: 'lib-sign-in-page',
   templateUrl: './sign-in-page.component.html',
   imports: [
-    SignInFormComponent,
+    LoginFormComponent,
     NgOptimizedImage,
   ]
 })

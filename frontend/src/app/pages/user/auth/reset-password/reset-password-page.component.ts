@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { ResetPasswordFormComponent } from "@glamour/features";
+import { ResetPasswordFormComponent } from "@lib/auth";
 
 @Component({
   selector: 'app-reset-password-page',

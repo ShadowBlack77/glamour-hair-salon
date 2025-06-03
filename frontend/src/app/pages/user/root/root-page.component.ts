@@ -1,7 +1,8 @@
 import { Component } from "@angular/core";
 import { RouterModule } from "@angular/router";
-import { AuthHeaderSegmentComponent } from "@glamour/core";
-import { FooterComponent, HeaderComponent } from "@glamour/shared";
+import { AuthHeaderComponent } from "@lib/auth";
+import { FooterComponent } from "@lib/shared/footer";
+import { HeaderComponent } from "@lib/shared/header";
 
 @Component({
   selector: 'app-root-page',
@@ -10,7 +11,7 @@ import { FooterComponent, HeaderComponent } from "@glamour/shared";
     RouterModule,
     HeaderComponent,
     FooterComponent,
-    AuthHeaderSegmentComponent,
+    AuthHeaderComponent
   ]
 })
 export class RootPageComponent {}

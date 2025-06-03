@@ -1,7 +1,7 @@
 import { animate, state, style, transition, trigger } from "@angular/animations";
 import { NgOptimizedImage } from "@angular/common";
 import { AfterViewInit, Component, signal, WritableSignal } from "@angular/core";
-import { InViewportDirective } from "@glamour/shared";
+import { InViewportDirective } from "@lib/shared/animations";
 
 @Component({
   selector: 'app-about-page',

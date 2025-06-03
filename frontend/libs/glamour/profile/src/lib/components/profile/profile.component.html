@@ -1,0 +1,31 @@
+@if (userProfile$ | async; as user) {
+  <div>
+    <div class="px-4 lg:px-16 xl:px-32 py-16 grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div class="flex justify-center">
+        <div class="w-full md:w-1/2">
+          <div class="mb-4">
+            <h1 class="text-2xl font-semibold">Welcome, {{ user.email }}!</h1> 
+          </div>
+          <div>
+            <p class="mb-2">
+              You can sign up for a conversation here! Fill out the form, then send it to us and we'll call you.
+            </p>
+            <p>
+              <lib-actived-booking />
+            </p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="mb-4">
+          <h3 class="text-2xl text-center">Booking Form</h3>
+        </div>
+        <div class="flex justify-center">
+          <div class="w-full md:w-1/2">
+            <ng-content />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}
