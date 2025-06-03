@@ -1,0 +1,23 @@
+<header class="flex flex-col md:flex-row justify-between px-4 md:px-16 xl:px-32 sticky bg-black w-full text-gray-400 top-0 left-0 py-2 items-center z-20">
+  <nav class="order-2 md:order-1 mb-2 md:mb-0">
+    <ul class="flex">
+      <li class="me-2">
+        <a routerLink="/home" routerLinkActive="active-link" [ariaCurrentWhenActive]="true">Home</a>
+      </li>
+      <li class="me-2">
+        <a routerLink="/about" routerLinkActive="active-link" [ariaCurrentWhenActive]="true">About</a>
+      </li>
+      <li class="me-2">
+        <a routerLink="/store" routerLinkActive="active-link" [ariaCurrentWhenActive]="true">Store</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="order-1 md:order-2 mb-2 md:mb-0">
+    <h1 class="text-4xl glamour-title text-white">Glamour</h1>
+  </div>
+
+  <div class="order-3">
+    <ng-content />
+  </div>
+</header>
